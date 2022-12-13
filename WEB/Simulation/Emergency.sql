@@ -62,8 +62,34 @@ CREATE TABLE public.personnel
 );
 
 
+
+
 ALTER TABLE IF EXISTS public.casernes
-    CONSTRAINT 
+ADD CONSTRAINT id_camion_fk FOREIGN KEY (camions) REFERENCES public.camions(id_camion);
+ALTER TABLE IF EXISTS public.casernes
+ADD CONSTRAINT id_equipe_fk FOREIGN KEY (equipes) REFERENCES public.equipes(id_equipe);
+ALTER TABLE IF EXISTS public.casernes
+ADD CONSTRAINT id_lieu_fk FOREIGN KEY (Lieux) REFERENCES public.lieux(id_lieu); 
+
+ALTER TABLE IF EXISTS public.equipes 
+ADD CONSTRAINT id_personnel_fk FOREIGN KEY (personnel) REFERENCES public.personnel(id_personnel);
+
+
+ALTER TABLE IF EXISTS public.interventions
+ADD CONSTRAINT id_equipe_fk FOREIGN KEY (equipe) REFERENCES public.equipes(id_equipe);
+ALTER TABLE IF EXISTS public.interventions
+ADD CONSTRAINT id_camion_fk FOREIGN KEY (camion) REFERENCES public.camions(id_camion);
+ALTER TABLE IF EXISTS public.interventions
+ADD CONSTRAINT id_lieu_fk FOREIGN KEY (lieu) REFERENCES public.lieux(id_lieu);
+ALTER TABLE IF EXISTS public.interventions
+ADD CONSTRAINT id_evenement_fk FOREIGN KEY (evenement) REFERENCES public.evenements(id_evenement);
+
+ALTER TABLE IF EXISTS public.lieux
+ADD CONSTRAINT id_evenement_fk FOREIGN KEY (evenement) REFERENCES public.evenements(id_evenement);
+
+
+
+
 
 ALTER TABLE IF EXISTS public.evenements
     add temps time
@@ -101,113 +127,4 @@ insert into personnel values ('601','dispo');
 insert into personnel values ('602','dispo');
 insert into personnel values ('603','dispo');
 
-
-
-{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          4.8503674914480825,
-          45.77002787260963
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          0,
-          0
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          0,
-          1
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          0,
-          2
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          0,
-          3
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          0,
-          4
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          4.864473200108961,
-          45.76857284064309
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          0,
-          5
-        ],
-        "type": "Point"
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          0,
-          6
-        ],
-        "type": "Point"
-      }
-    }
-    {
-        
-    }
-  ]
-}
 
