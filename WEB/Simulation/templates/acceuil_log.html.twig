@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Piqure Gourmande</title>
+    {% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="/style/style.css">
+    {% endblock %}
+</head>
+<header >
+    {% if session == true %}
+		{% include "navbarco.html.twig" %}
+	{% else %}
+		{% include "navbar.html.twig" %}
+	{% endif %}
+    
+</header>
+
+<body >
+
+    <div class="acceuil_log_main">
+        <h1>La Piqure Gourmande</h1>
+    </div>
+
+<body>
+
+
+</html>

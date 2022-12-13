@@ -1,0 +1,72 @@
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pathologie</title>
+        {% block stylesheet %}
+			<link rel="stylesheet" href="style/style.css?=1221212"/>
+		{% endblock %}
+    </head>
+
+    
+
+    <body>
+
+        <header>
+            {% if session == true %}
+                {% include "navbarco.html.twig" %}
+            {% else %}
+                {% include "navbar.html.twig" %}
+            {% endif %} 
+        
+        </header>
+
+         <div class="container">
+
+        
+    
+                <form form method='POST' action='index.php?p=recherche_patho' class="form_pathologie">
+                    <label for="patho" class="form_pathologie_item">Tapez un symptome pour rechercher une Pathologie
+                        <input type="text" id="patho" name="patho" class="form_pathologie_item">
+                    </label>
+                    <button type="submit" id="envoi" class="form_pathologie_item">Envoyer</button>
+
+                </form>
+
+          
+          
+            
+            <div class="resultat_pathologie_main">
+
+
+                {% if result == "" %}
+                <div class="resultat_pathologie_item">
+                    <p>{{ erreur }}</p>
+                </div>
+
+                {% else %}
+
+                    {% for pathologie in result %}
+                        <div class="resultat_pathologie_item">
+                        
+                            <h2>{{ pathologie.patho_desc }}</h2>
+                            <p>{{ pathologie.symptome_desc }}</p>
+                        </div>
+                    {% endfor %}
+
+                {% endif %} 
+
+            </div>
+
+        </div>
+
+        
+
+       
+        </div>
+
+
+    </body>
+
+</html> 

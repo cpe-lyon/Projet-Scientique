@@ -1,0 +1,60 @@
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pathologie</title>
+        {% block stylesheet %}
+			<link rel="stylesheet" href="style/style.css"/>
+		{% endblock %}
+    </head>
+
+    
+
+    <body>
+
+        <header>
+            {% if session == true %}
+                {% include "navbarco.html.twig" %}
+            {% else %}
+                {% include "navbar.html.twig" %}
+            {% endif %} 
+            <p class="list_symptome_main_titre">Liste Symptômes</p>
+        </header>
+
+        <section class="list_symptome_main_section">
+
+        {% set pathoactive = "" %}
+        {% for pathologie in result %}
+
+
+            {% if pathoactive == pathologie.descp %}
+            
+            , {{ pathologie.descsy }}            
+
+            {% endif %}
+
+            {% if  pathoactive != pathologie.descp %}
+
+                {% if not loop.first %}
+                    </div>
+
+                {% endif %}
+                
+                <div class="listsymptome_item"> 
+                    Pathologies : {{ pathologie.descp }} <br/>
+                    Symptômes : {{ pathologie.descsy }}
+
+                
+            {% endif %}
+
+
+            {% set  pathoactive = pathologie.descp %}
+
+        {% endfor %}
+
+        </section>
+
+    </body>
+
+<html>

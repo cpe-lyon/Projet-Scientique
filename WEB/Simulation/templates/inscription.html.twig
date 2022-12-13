@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Piqure Gourmande</title>
+    {% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="/style/style.css">
+    {% endblock %}
+</head>
+<header>
+    {% if session == true %}
+		{% include "navbarco.html.twig" %}
+	{% else %}
+		{% include "navbar.html.twig" %}
+	{% endif %}
+    <p class="title">Inscription</p>
+</header>
+
+<body>
+
+    <div class="form_row">
+
+        <form action="index.php?p=register" method="POST"  class="formcenter">
+
+            <label for="email" class="form_center_item">
+                <div class="label_form">Adresse e-mail :</div>
+                <input type="text" id="email" name="email">
+            </label>
+            <label for="password" class="form_center_item">
+                <div class="label_form">Mot de passe : </div>
+                <input type="password" id="password" name="password">
+            </label>
+            <label for="confirm" class="form_center_item">
+                <div class="label_form"> Confirmation mot de passe : </div>
+                <input type="password" id="confirm" name="confirm">
+            </label>
+
+
+            <p class="alerte">{{ erreur }}</p>
+            <button type="submit"  class="form_center_item">Envoyer</button>
+            <p>Vous avez déjà un compte ? <a href="index.php?p=acceuil">Connectez-vous</a></p>
+        </form>
+
+    </div>
+    
+</body>
+
+</html>
