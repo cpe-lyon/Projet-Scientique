@@ -1,7 +1,7 @@
 <?php
 class Model{
     private $host = 'localhost';
-    private $dbname = 'acudb';
+    private $dbname = 'emergency';
     private $user = 'pgtp';
     private $password = 'tp';
     protected $bdd;

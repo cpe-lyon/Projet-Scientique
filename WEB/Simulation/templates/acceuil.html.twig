@@ -9,6 +9,9 @@
     {% block stylesheets %}
     <link type="text/css" rel="stylesheet" href="/style/style.css">
     {% endblock %}
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 </head>
 <header>
     {% if session == true %}
@@ -16,32 +19,68 @@
 	{% else %}
 		{% include "navbar.html.twig" %}
 	{% endif %}
-    <p class="title">Connexion</p>
 </header>
 
 <body>
 
-    
-    <div class="form_row">
-        <form action="index.php?p=veriflogin" method="POST" class="formcenter">
-            <label for="email" class="form_center_item">
-                <div class="label_form">Adresse e-mail :</div>
-                <input type="text" id="email" name="email">
-            </label>
-            <label for="password" class="form_center_item">
-                <div class="label_form">Mot de passe : </div>
-                <input type="password" id="password" name="password">
-            </label>
-            <p class="alerte">{{ erreur }}</p>
-            <button type="submit"  class="form_center_item" >Envoyer</button>
-            <p>Vous n'avez pas de compte ? <a href="index.php?p=inscription">Inscrivez-vous</a></p>
-        </form>
+    <div style=" display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;">
 
-    </div>
+        <div id="map"  style="width: 200vh; height: 45vw;"></div>
+
+
+        {% for pathologie in result %}
+
+        {% if pathologie.id == 1 %}
+
+        <div class="pathologie">
+            <h1>{{ pathologie.nom }}</h1>
+            <p>{{ pathologie.description }}</p>
+            <p>{{ pathologie.symptomes }}</p>
+            <p>{{ pathologie.traitement }}</p>
+            <p>{{ pathologie.prix }}</p>
+
+        </div>
+
+        {% endif %}
+        {% endfor %}
         
       
+        <script>
 
-       
+        var map = L.map('map').setView([42.3, 9.1], 10);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            for (let j = 0; j < 0.5; j+=0.084) {
+                
+                for (let i = 0; i < 0.45; i+=0.05) {
+                    x = 42.54 - j;
+                    y = 8.8 + i;
+                    L.circle([42.54 - j , 8.8 + i], {radius: 2000, color:'#338899'} ).addTo(map)
+                    .bindPopup(x + ' ; ' + y)
+                    .on('click', function() { alert('Clicked on a member of the group!'); })
+                    
+                }
+            }
+
+            var myIcon = L.icon({
+                iconUrl: '/Camion.png',
+                iconSize: [80, 50],
+                
+            });
+
+            L.marker([42.54, 8.8], {icon: myIcon}).addTo(map);
+
+
+    
+        </script>
+    </div>
+    
    
     
 </body>

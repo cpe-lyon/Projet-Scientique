@@ -3,10 +3,12 @@
 include_once('controller/controllerIndex.php');
 include_once('controller/controller_pathologie.php');
 include_once('controller/controllerApi.php');
+include_once('controller/controller_emergency.php');
 
 $index = new Index();  // instanciation de la classe Index
 $patho = new Pathologie(); // instanciation de la classe Pathologie
 $api = new APIcontroller(); // instanciation de la classe APIcontroller
+$emergency = new Emergency(); // instanciation de la classe Emergency
 $page= $index->getUrl(); // récupère l'url de la page
 
 
@@ -56,6 +58,8 @@ elseif($_SERVER['REQUEST_METHOD'] == 'GET'){
             $api->error();
         }
     
+}elseif($page == "toto"){
+    $emergency -> getEmergency();
 }
     else{
         if (isset($_SESSION['email']) and $page=="acceuil"){
