@@ -5,7 +5,7 @@ import time #Pour attendre entre chaque envoi
 
 
 MQTT_SERVER = "172.19.0.5"
-MQTT_PORT = "1883"
+MQTT_PORT = 1883
 MQTT_TOPIC = "feu"
 
 client = mqtt.Client() #Création client MQTT
