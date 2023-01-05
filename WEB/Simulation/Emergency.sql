@@ -26,8 +26,8 @@ CREATE TABLE public.camions
     id integer NOT NULL,
     etat varchar NOT NULL,
     citerne integer NOT NULL,
-    Position_X integer NOT NULL,
     Position_Y integer NOT NULL,
+    Position_X integer NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -43,8 +43,8 @@ CREATE TABLE public.equipes
 CREATE TABLE public.lieux
 (
     id integer NOT NULL,
-    Adresse_X integer NOT NULL,
     Adresse_Y integer NOT NULL,
+    Adresse_X integer NOT NULL,
     Intensite double precision NOT NULL,
     PRIMARY KEY (id)
 );

@@ -30,24 +30,7 @@
 
         <div id="map"  style="width: 200vh; height: 45vw;"></div>
 
-
-        {% for pathologie in result %}
-
-        {% if pathologie.id == 1 %}
-
-        <div class="pathologie">
-            <h1>{{ pathologie.nom }}</h1>
-            <p>{{ pathologie.description }}</p>
-            <p>{{ pathologie.symptomes }}</p>
-            <p>{{ pathologie.traitement }}</p>
-            <p>{{ pathologie.prix }}</p>
-
-        </div>
-
-        {% endif %}
-        {% endfor %}
         
-      
         <script>
 
         var map = L.map('map').setView([42.3, 9.1], 10);
@@ -56,25 +39,60 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            for (let j = 0; j < 0.5; j+=0.084) {
-                
-                for (let i = 0; i < 0.45; i+=0.05) {
-                    x = 42.54 - j;
-                    y = 8.8 + i;
-                    L.circle([42.54 - j , 8.8 + i], {radius: 2000, color:'#338899'} ).addTo(map)
-                    .bindPopup(x + ' ; ' + y)
-                    .on('click', function() { alert('Clicked on a member of the group!'); })
-                    
-                }
-            }
 
-            var myIcon = L.icon({
+            WayPointsTrace = new L.LayerGroup();
+
+            {% for lieux in result %}
+
+                
+
+                if ({{lieux.intensite}} <= 3){
+                    colorcircle = '#41DE25'
+                }else if  ({{lieux.intensite}} <= 6) { 
+                    colorcircle = '#FFC300'
+                }else if  ({{lieux.intensite}} <= 9) { 
+                    colorcircle = '#FF5733'
+                }else {
+                    colorcircle = '#C70039'
+                }
+
+                if ( {{ lieux.intensite }} * 300 > 3500 ){
+                    m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  3500, color:colorcircle} ).addTo(map)
+                    .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
+                } else if ( {{ lieux.intensite }} * 300 < 100 ) {
+                    m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  200, color:colorcircle} ).addTo(map)
+                    .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
+                }else{
+                    m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius: {{ lieux.intensite }} * 300, color:colorcircle} ).addTo(map)
+                    .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
+                }
+
+                Wpt_Name = '<b><input type="text" value="Etape NN" id="MyName"/> <input type="button" value="Save" Onclick="console.log("toto")"/>';
+
+                m.data = {
+                    properties: { name: Wpt_Name }
+                };
+
+                m.addTo(WayPointsTrace);
+
+                m.getPopup().on("click", function (e) {
+	  
+                //  m.setLatLng(e.latlng);
+                
+                    m.getPopup().setContent(ItemPopup);
+                });
+
+            {% endfor %}
+
+              var myIcon = L.icon({
                 iconUrl: '/Camion.png',
                 iconSize: [80, 50],
                 
             });
-
-            L.marker([42.54, 8.8], {icon: myIcon}).addTo(map);
+                 
+            {% for Camion_1 in camion %}
+                L.marker([{{ 42.54 - Camion_1.position_x/12 }},  {{ 8.8 + Camion_1.position_y/20 }}], {icon: myIcon}).addTo(map)            
+            {% endfor %}
 
 
     

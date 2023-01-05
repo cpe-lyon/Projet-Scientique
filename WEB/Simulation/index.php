@@ -58,10 +58,15 @@ elseif($_SERVER['REQUEST_METHOD'] == 'GET'){
             $api->error();
         }
     
-}elseif($page == "toto"){
-    $emergency -> getEmergency();
+}elseif($page == "acceuil"){
+    $emergency -> Emergency_Localisation_Feux();
+    
+  
+   
+
 }
-    else{
+    
+else{
         if (isset($_SESSION['email']) and $page=="acceuil"){
             $index->render('acceuil_log'); // page d'accueil si l'utilisateur est connecté
         }else {

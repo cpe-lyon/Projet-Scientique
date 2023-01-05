@@ -1,20 +1,31 @@
 <?php
 
-require_once('model/pathologie/emergency_bdd.php');
+require_once('model/pathologie/Emergency_BDD.php');
 require_once('controller/controllerTwig.php');
 
 
 class Emergency extends ControllerTwig{
-    public function getEmergency(){
+
+   
+
+    public function Emergency_Localisation_Feux(){
         $emergency = new Emergency_BDD();
-        $result = $emergency->getEmergency();
-        if($result != null){
-            $this->renderWithParams('emergency', ['result' => $result]);
+        $result = $emergency->Emergency_Localisation_Feux_BDD();
+        $camion = $emergency->Emergency_Localisation_Camion_BDD();
+        if($result != null || $camion != null){
+            $this->renderWithParams('acceuil', ['result' => $result, 'camion' => $camion]);
         }
         else{
             $this->render('acceuil');
         }
         
+    }
+
+
+
+    public function map(){
+        Emergency_Localisation_Feux();
+        Emergency_Localisation_Camion();
     }
 }
 
