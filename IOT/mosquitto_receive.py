@@ -20,7 +20,8 @@ try:
     for i in range(0, 6):
         for j in range(0, 10):
             x = random.randint(0, 10)
-            point="capteur,tag=value x="+ j +",longitude="+i+",intensity="+x
+            point="capteur,tag=value x="+ j +",longitude="+i+",intensity="+
+            print(point)
             client.publish(MQTT_TOPIC,point)
             time.sleep(0.1)
 except:
