@@ -24,7 +24,7 @@ CREATE TABLE public.casernes
 CREATE TABLE public.camions
 (
     id integer NOT NULL,
-    etat varchar NOT NULL,
+    etat integer NOT NULL,
     citerne integer NOT NULL,
     Position_Y integer NOT NULL,
     Position_X integer NOT NULL,
@@ -55,6 +55,7 @@ CREATE TABLE public.interventions
     equipe integer NOT NULL,
     camion int NOT NULL,
     lieu int NOT NULL,
+    etat int NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -106,16 +107,16 @@ insert into camions values (4,'Dispo',3, 0, 0);
 insert into camions values (5,'Dispo',3, 0, 0);
 
 
-insert into personnel values (1,'Dispo');
-insert into personnel values (2,'Dispo');
-insert into personnel values (3,'Dispo');
-insert into personnel values (4,'Dispo');
-insert into personnel values (5,'Dispo');
-insert into personnel values (6,'Dispo');
-insert into personnel values (7,'Dispo');
-insert into personnel values (8,'Dispo');
-insert into personnel values (9,'Dispo');
-insert into personnel values (10,'Dispo');
+insert into personnel values (1,0);
+insert into personnel values (2,0);
+insert into personnel values (3,0);
+insert into personnel values (4,0);
+insert into personnel values (5,0);
+insert into personnel values (6,0);
+insert into personnel values (7,0);
+insert into personnel values (8,0);
+insert into personnel values (9,0);
+insert into personnel values (10,0);
 
 
 
