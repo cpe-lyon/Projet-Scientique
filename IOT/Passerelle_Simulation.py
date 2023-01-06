@@ -24,7 +24,7 @@ def connect():
         
 	# execute a statement
         print('PostgreSQL database version:')
-        cur.execute('SELECT * FROM Camions')
+        cur.execute('SELECT * FROM Lieux')
 
         # display the PostgreSQL database server version
         db_version = cur.fetchone()
