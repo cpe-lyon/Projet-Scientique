@@ -44,13 +44,9 @@ def connect(data):
 
         print(type(data))
 
+        list_data = data.strip('][').split(', ')
 
-        row1 = data[0]
-        row2 = data[1]
-        row3 = data[2]
-
-        print(data)
-        print(row1, row2, row3)
+        print(list_data)
 
 
         try:
