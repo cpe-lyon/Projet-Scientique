@@ -65,7 +65,7 @@ def connect():
         print(db_version)
 
         for row in cur.fetchall():
-            x = f"{int(row[1])}, {int(row[2])}, {int(row[3])}\n"
+            x = ("%d %d %d \n" %(row[1], row[2], row[3]) )
             sendUARTMessage(x) 
             
 
