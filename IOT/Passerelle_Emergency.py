@@ -47,7 +47,7 @@ def connect(data):
         row3 = data[2]
 
        
-        print(separated_numbers)
+        print(row1, row2, row3)
 
 
         try:
