@@ -9,7 +9,7 @@ import paho.mqtt.client as paho
 # send serial message 
 SERIALPORT = "/dev/ttyACM0"
 BAUDRATE = 115200
-broker_address = "192.168.1.38"
+broker_address = "127.0.0.1"
 ser = serial.Serial()
 
 def initUART():        

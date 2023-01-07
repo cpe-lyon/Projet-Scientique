@@ -43,3 +43,7 @@
 
     dmesg | grep tty 
 
+
+## Mosquitto
+    # Installation de Mosquitto
+    apt-get install mosquitto mosquitto-clients
