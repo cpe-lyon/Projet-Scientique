@@ -43,13 +43,9 @@ def connect(data):
         """ Connect to the PostgreSQL database server """
         conn = None
 
-        print(type(data))
+     
 
-        list_data = ast.literal_eval(data)
-
-
-
-        print(list_data[0], "\n", list_data[1], "\n")
+    
 
 
         try:
@@ -67,17 +63,10 @@ def connect(data):
                 # create a cursor
                 cur = conn.cursor()
 
-                # execute a statement
-                print('PostgreSQL database version:')
-                cur.execute('SELECT * FROM Lieux WHERE intensite > 0')
+                list_data = ast.literal_eval(data)
 
-
-                db_version = cur.fetchall()
-                print(db_version)
-
-                        
-
-                # display the PostgreSQL database server version
+                if (list_data[0] < 10 and list_data[1] < 6):
+                        cur.execute(f"UPDATE Lieux SET intensite = {list_data[2]} WHERE adresse_y = {list_data[0]} AND adresse_x = {list_data[1]}")
 
 
                 # close the communication with the PostgreSQL
