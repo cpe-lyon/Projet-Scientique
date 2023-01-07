@@ -42,13 +42,11 @@ def connect(data):
         """ Connect to the PostgreSQL database server """
         conn = None
 
-        numbers = data
+        row1 = data[0]
+        row2 = data[1]
+        row3 = data[2]
 
-        print(data)
-
-        separator = ", "
-        separated_numbers = separator.join(str(number) for number in numbers)
-
+       
         print(separated_numbers)
 
 
