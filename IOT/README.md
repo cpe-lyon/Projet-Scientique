@@ -1,6 +1,18 @@
 # Github 
+    # Initialisation du projet
+    git init 
 
-git checkout main 
+    # Ajout des fichiers
+    git clone https://github.com/cpe-lyon/Projet-Scientique.git
+
+    # Déplacement dans le dossier
+    cd Projet-Scientifique
+
+    # Set to main branch
+    git checkout main 
+
+    # Pull
+    git pull
 
 
 # Script Python 
@@ -12,6 +24,9 @@ git checkout main
 
     # Installation pip3
     sudo apt-get install python3-pip
+
+    # Insttalation de git 
+    sudo apt-get install git
 
     # Installation Serial
     pip3 install pyserial
@@ -25,6 +40,6 @@ git checkout main
 ## Script SPEC
 
     Port COM Commande sur Linux : 
-    
+
     dmesg | grep tty 
 
