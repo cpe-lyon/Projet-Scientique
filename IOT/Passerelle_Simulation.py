@@ -64,7 +64,7 @@ def connect():
         db_version = cur.fetchall()
         print(db_version)
 
-        for row in cur.fetchall():
+        for row in db_version:
             x = ("%d %d %d \n" %(row[1], row[2], row[3]) )
             print(x)
             sendUARTMessage(x) 
