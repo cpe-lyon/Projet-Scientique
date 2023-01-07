@@ -66,8 +66,10 @@ def connect(data):
                 list_data = ast.literal_eval(data)
 
                 if (list_data[0] < 10 and list_data[1] < 6):
-                        cur.execute(f"UPDATE Lieux SET intensite = {list_data[2]} WHERE adresse_y = {list_data[0]} AND adresse_x = {list_data[1]}")
+                        x = (f"UPDATE Lieux SET intensite = {list_data[2]} WHERE adresse_y = {list_data[0]} AND adresse_x = {list_data[1]}")
+                        print(x)
 
+                        #cur.execute(
 
                 # close the communication with the PostgreSQL
                 cur.close()
