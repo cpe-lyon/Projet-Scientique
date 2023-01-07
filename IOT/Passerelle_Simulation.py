@@ -60,6 +60,10 @@ def connect():
         print('PostgreSQL database version:')
         cur.execute('SELECT * FROM Lieux WHERE intensite > 0')
 
+        
+        db_version = cur.fetchall()
+        print(db_version)
+
         for row in cur.fetchall():
             x = f"{int(row[1])}, {int(row[2])}, {int(row[3])}"
             sendUARTMessage(x) 
@@ -67,8 +71,6 @@ def connect():
 
         # display the PostgreSQL database server version
 
-        db_version = cur.fetchall()
-        print(db_version)
        
 	# close the communication with the PostgreSQL
         cur.close()
