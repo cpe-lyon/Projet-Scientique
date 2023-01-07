@@ -66,6 +66,7 @@ def connect():
 
         for row in cur.fetchall():
             x = ("%d %d %d \n" %(row[1], row[2], row[3]) )
+            print(x)
             sendUARTMessage(x) 
             
 
