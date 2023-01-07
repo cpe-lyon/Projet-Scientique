@@ -35,7 +35,7 @@
     pip3 install paho-mqtt
 
     # Installation  POSTGRESQL
-    pip3 install psycopg2
+    pip3 install psycopg2-binary
 
 ## Script SPEC
 
