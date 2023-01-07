@@ -61,7 +61,7 @@ def connect():
         cur.execute('SELECT * FROM Lieux WHERE intensite > 0')
 
         for row in cur.fetchall():
-            x = (int(row[1]), int(row[2]), int(row[3]))
+            x = f"{int(row[1])}, {int(row[2])}, {int(row[3])}"
             sendUARTMessage(x) 
             
 
