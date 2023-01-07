@@ -2,6 +2,7 @@ import psycopg2
 import serial
 import time
 import paho.mqtt.client as paho
+import ast
 
 
 
@@ -44,7 +45,7 @@ def connect(data):
 
         print(type(data))
 
-        list_data = data.strip('][').split(', ')
+        list_data = ast.literal_eval(data)
 
         print(list_data)
 
