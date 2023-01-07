@@ -47,7 +47,7 @@ def connect():
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
         conn = psycopg2.connect(
-            host="localhost",
+            host="127.0.0.1",
             database="emergency",
             user="pgtp",
             password="tp"
