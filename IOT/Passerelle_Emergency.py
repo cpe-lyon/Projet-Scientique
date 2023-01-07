@@ -38,9 +38,15 @@ def on_publish(client,userdata,result):
     print("Donnée Publiee \n")
     pass
 
-def connect():
+def connect(data):
     """ Connect to the PostgreSQL database server """
     conn = None
+
+    numbers = data
+
+    for number in numbers:
+        print(number)
+
     try:
         
 
@@ -90,16 +96,16 @@ if __name__ == '__main__':
                         if (ser.inWaiting() > 0): # if incoming bytes are waiting 
                                 time.sleep(0.1)
                                 data_str = ser.read_until(b']') # read the bytes and convert from binary array to ASCII )
-                                x = data_str.decode("utf-8")
+                                data_decode = data_str.decode("utf-8")
 
                                 #Mosquitto
                                 client = paho.Client("Alarme")
                                 client.on_publish = on_publish
                                 client.connect(broker_address)
-                                client.publish("feu",x)
+                                client.publish("feu",data_decode)
 
                                 #PostgreSQL
-                                connect(x)
+                                connect(data_decode)
 
                                 LAST_VALUE = data_str
                                 print(data_str)
