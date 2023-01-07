@@ -7,7 +7,7 @@ import paho.mqtt.client as paho
 
 
 # send serial message 
-SERIALPORT = "COM3"
+SERIALPORT = "/dev/ttyACM0"
 BAUDRATE = 115200
 broker_address = "192.168.1.38"
 ser = serial.Serial()
