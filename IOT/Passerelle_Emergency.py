@@ -47,7 +47,9 @@ def connect(data):
 
         list_data = ast.literal_eval(data)
 
-        print(list_data)
+
+
+        print(list_data[0], "\n", list_data[1], "\n")
 
 
         try:
