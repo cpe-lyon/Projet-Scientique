@@ -42,6 +42,10 @@ def connect(data):
         """ Connect to the PostgreSQL database server """
         conn = None
 
+        data.toList()
+
+
+
         row1 = data[0]
         row2 = data[1]
         row3 = data[2]
