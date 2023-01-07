@@ -5,7 +5,7 @@ import time
 
 
 
-SERIALPORT = "COM4"
+SERIALPORT = "/dev/ttyACM0"
 BAUDRATE = 115200
 ser = serial.Serial()
 

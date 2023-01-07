@@ -3,8 +3,6 @@
 git checkout main 
 
 
-
-
 # Script Python 
 
 ## Installation
@@ -24,6 +22,9 @@ git checkout main
     # Installation  POSTGRESQL
     pip3 install psycopg2
 
-    
+## Script SPEC
 
+    Port COM Commande sur Linux : 
+    
+    dmesg | grep tty 
 
