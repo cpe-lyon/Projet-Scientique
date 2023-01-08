@@ -9,7 +9,7 @@ import ast
 
 # send serial message 
 SERIALPORT = "/dev/ttyACM0"
-BAUDRATE = 9600
+BAUDRATE = 115200
 broker_address = "127.0.0.1"
 ser = serial.Serial()
 
