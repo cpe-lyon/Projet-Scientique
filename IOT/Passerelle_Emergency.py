@@ -3,6 +3,7 @@ import serial
 import time
 import paho.mqtt.client as paho
 import ast
+import pycurl
 
 
 
@@ -100,7 +101,18 @@ if __name__ == '__main__':
                                 client.publish("feu",data_decode)
 
                                 #PostgreSQL
-                                connect(data_decode)
+
+                                list_data = ast.literal_eval(data_decode)
+
+                                if (list_data[0] < 10 and list_data[1] < 6):
+                                        c = pycurl.Curl()
+                                        c.setopt(c.URL, 'http://localhost:8000/api/lieux/'+str(list_data[0])+'/'+str(list_data[1])+'/'+str(list_data[2]))
+                                        c.perform()
+                                        c.close()
+
+
+
+                                #connect(data_decode)
 
                                 LAST_VALUE = data_str
                                 print(data_str)
