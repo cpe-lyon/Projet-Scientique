@@ -59,7 +59,7 @@ def connect():
         
 	# execute a statement
         print('PostgreSQL database version:')
-        cur.execute('SELECT * FROM Lieux WHERE intensite > 0')
+        cur.execute('SELECT * FROM Lieux')
 
         
         db_version = cur.fetchall()
