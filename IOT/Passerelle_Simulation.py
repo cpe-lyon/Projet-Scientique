@@ -36,7 +36,7 @@ def initUART():
 
 def sendUARTMessage(msg):
     ser.write(msg.encode())
-    time.sleep(1)
+    time.sleep(2)
 
 
 def connect():
@@ -88,4 +88,4 @@ if __name__ == '__main__':
     initUART()
     while True:
         connect()
-        time.sleep(0.2)
+        time.sleep(1)
