@@ -89,7 +89,7 @@ if __name__ == '__main__':
                         #time.sleep(100)
 
                         if (ser.inWaiting() > 0): # if incoming bytes are waiting 
-                                time.sleep(0.1)
+                                #time.sleep(0.1)
                                 data_str = ser.read_until(b']') # read the bytes and convert from binary array to ASCII )
                                 data_decode = data_str.decode("utf-8")
 
