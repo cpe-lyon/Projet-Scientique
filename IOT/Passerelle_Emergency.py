@@ -101,15 +101,17 @@ if __name__ == '__main__':
                                 client.publish("feu",data_decode)
 
                                 #PostgreSQL
+                                try :
+                                        list_data = ast.literal_eval(data_decode)
 
-                                list_data = ast.literal_eval(data_decode)
-
-                                if (list_data[0] < 10 and list_data[1] < 6):
-                                        c = pycurl.Curl()
-                                        c.setopt(c.URL, 'http://localhost:8000/api/lieux/'+str(list_data[0])+'/'+str(list_data[1])+'/'+str(list_data[2]))
-                                        c.perform()
-                                        c.close()
-
+                                        if (list_data[0] < 10 and list_data[1] < 6):
+                                                c = pycurl.Curl()
+                                                c.setopt(c.URL, 'http://localhost:8000/api/lieux/'+str(list_data[0])+'/'+str(list_data[1])+'/'+str(list_data[2]))
+                                                c.perform()
+                                                c.close()
+                                except:
+                                        print("Erreur de conversion")
+                                        
 
 
                                 #connect(data_decode)
