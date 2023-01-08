@@ -36,7 +36,7 @@ def initUART():
 
 def sendUARTMessage(msg):
     ser.write(msg.encode())
-    time.sleep(1.1)
+    time.sleep(0.2)
 
 
 def connect():
