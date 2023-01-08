@@ -88,4 +88,4 @@ if __name__ == '__main__':
     initUART()
     while True:
         connect()
-        time.sleep(10)
+        time.sleep(0.2)
