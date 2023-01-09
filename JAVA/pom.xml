@@ -15,9 +15,9 @@
         </dependency>
     </dependencies>
     <properties>
-        <maven.compiler.source>19.0.1</maven.compiler.source>
-        <maven.compiler.target>19.0.1</maven.compiler.target>
-        <maven.compiler.release>19</maven.compiler.release>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.release>18</maven.compiler.release>
     </properties>
 
     <build>
