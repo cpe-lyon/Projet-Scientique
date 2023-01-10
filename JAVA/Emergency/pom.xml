@@ -26,6 +26,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
+
                     <configuration>
                         <archive>
                             <manifest>
@@ -33,9 +34,10 @@
                                 <mainClass>Emergency</mainClass>
                             </manifest>
                         </archive>
-                        <source>17</source>
-                        <target>17</target>
-                    </configuration>
+
+                        <source>19</source>
+                        <target>19</target>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
