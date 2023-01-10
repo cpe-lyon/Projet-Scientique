@@ -1,0 +1,33 @@
+>4 Feu eteint repasse a 0 
+>10 Pompier eteignable
+11 Code java car sinon trop de propagation
+12 Brulé
+
+Camion : 
+0 Dispo
+1 Préparation Intervention Declenché 
+2 Mouvement vers Intervention passe à 3 il est sur le lieu 
+3 Intervention en cours
+Si inter fini mais eau dispo : 
+	Camion : Etat 0 
+Sinon : Etat 4 car plus d'eau Mouvement vers Réaprovissionement donc destination 0, 0 
+
+5 Réaprovisionement passe à 0  
+
+
+
+Entre 4 et 6 non inclus +0,1 
+Entre 6 et 8 non inclus +0,2
+Entre 8 et 10 non inclus +0,4
+Entre 10 et 12 feu plus rien a brulé ni a reconstruire 
+
+
+
+9 
+declenche inter
+---toour
+9+0,4
+---- tour
+9,4+0,4
+----
+
