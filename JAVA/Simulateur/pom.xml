@@ -1,7 +1,7 @@
 <project >
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
-    <artifactId>Emergency</artifactId>
+    <artifactId>Simulateur</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -22,20 +22,22 @@
 
     <build>
         <plugins>
+
+
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
-                    <configuration>
+
+                <configuration>
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <mainClass>Emergency</mainClass>
+                                <mainClass>Simulator</mainClass>
                             </manifest>
                         </archive>
                         <source>17</source>
                         <target>17</target>
-                    </configuration>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -49,7 +51,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>Emergency</mainClass>
+                    <mainClass>Simulator</mainClass>
                 </configuration>
             </plugin>
         </plugins>
