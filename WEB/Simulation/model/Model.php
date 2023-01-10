@@ -1,7 +1,7 @@
 <?php
 class Model{
     private $host = 'localhost';
-    private $dbname = 'emergency';
+    private $dbname = 'simulation';
     private $user = 'pgtp';
     private $password = 'tp';
     protected $bdd;
