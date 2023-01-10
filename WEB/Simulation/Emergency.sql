@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS public.equipes CASCADE;
 DROP TABLE IF EXISTS public.lieux CASCADE;
 DROP TABLE IF EXISTS public.interventions CASCADE;
 DROP TABLE IF EXISTS public.personnel CASCADE;
-
+DROP TABLE IF EXISTS public.equipe_personne CASCADE;
 
 -- création des tables --
 
@@ -24,7 +24,7 @@ CREATE TABLE public.casernes
 CREATE TABLE public.camions
 (
     id integer NOT NULL,
-    etat varchar NOT NULL,
+    etat integer NOT NULL,
     citerne integer NOT NULL,
     Position_Y integer NOT NULL,
     Position_X integer NOT NULL,
@@ -34,8 +34,9 @@ CREATE TABLE public.camions
 CREATE TABLE public.equipes
 (
     id integer NOT NULL,
+    num_equipe integer NOT NULL,
     personnel integer NOT NULL,
-    etat varchar NOT NULL,
+    etat integer NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -55,6 +56,7 @@ CREATE TABLE public.interventions
     equipe integer NOT NULL,
     camion int NOT NULL,
     lieu int NOT NULL,
+    etat int NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -94,16 +96,26 @@ ALTER TABLE IF EXISTS public.interventions
 ADD CONSTRAINT id_lieu_fk FOREIGN KEY (lieu) REFERENCES public.lieux(id);
 
 
+
+CREATE TABLE equipe_personne (
+    equipe_id INT NOT NULL,
+    personne_id INT NOT NULL,
+    FOREIGN KEY (equipe_id) REFERENCES equipes (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (personne_id) REFERENCES personnel (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    PRIMARY KEY (equipe_id, personne_id)
+);
+
+
 -- METTRE LES CLEFS ETRANGERES AUX TABLES ! --
 
 
 -- ajout de données --
 
-insert into camions values (1,'Dispo',3, 0, 0);
-insert into camions values (2,'Dispo',3, 0, 0);
-insert into camions values (3,'Dispo',3, 0, 0);
-insert into camions values (4,'Dispo',3, 0, 0);
-insert into camions values (5,'Dispo',3, 0, 0);
+insert into camions values (1,0,3, 0, 0);
+insert into camions values (2,0,3, 0, 0);
+insert into camions values (3,0,3, 0, 0);
+insert into camions values (4,0,3, 0, 0);
+insert into camions values (5,0,3, 0, 0);
 
 
 insert into personnel values (1,'Dispo');
@@ -180,5 +192,36 @@ insert into lieux values (58, 7, 5, 0);
 insert into lieux values (59, 8, 5, 0);
 insert into lieux values (60, 9, 5, 0);
 
+insert into Equipes values(1,1,1, 0);
+insert into Equipes values(2,1,2, 0);
+insert into Equipes values(3,2,3, 0);
+insert into Equipes values(4,2,4, 0);
+insert into Equipes values(5,3,5, 0);
+insert into Equipes values(6,3,6, 0);
+insert into Equipes values(7,4,7, 0);
+insert into Equipes values(8,4,8, 0);
+insert into Equipes values(9,5,9, 0);
+insert into Equipes values(10,5,10, 0);
 
 
+insert into Equipe_Personne values(1,1);
+insert into Equipe_Personne values(1,2);
+insert into Equipe_Personne values(2,3);
+insert into Equipe_Personne values(2,4);
+insert into Equipe_Personne values(3,5);
+insert into Equipe_Personne values(3,6);
+insert into Equipe_Personne values(4,7);
+insert into Equipe_Personne values(4,8);
+insert into Equipe_Personne values(5,9);
+insert into Equipe_Personne values(5,10);
+
+
+
+
+-- requetes --
+
+-- Affiche les personnes d'une equipe --
+
+-- ep.equipe_id = 1 or 2 or 3 or 4 or 5  car il y a 5 equipes --
+
+-- select * from equipes e inner join equipe_personne ep on e.id = ep.equipe_id inner join personnel p on ep.personne_id = p.id where ep.equipe_id = 1;
