@@ -31,7 +31,39 @@
     align-items: center;">
 
         <div id="map"  style="width: 200vh; height: 45vw;"></div>
+        <div class="filtre">  
+            <div class="menu_emergency">
 
+                {% for toto in nb  %}
+                    <div >Nombre d'interventions en cours :</div>
+                    <div > {{ toto.nb_interventions }}</div>
+                {% endfor %}
+                {% for feux in nb_feux_interventions %}
+                    <div>Nombre d'interventions finis :</div>
+                    <div>{{ feux.nb_feux_interventions }}</div>
+                {% endfor %}
+
+               
+                
+                
+                {% for feu in total_feux  %}
+                    <div>Nombre de feux en cours :</div>
+                    <div> {{ feu.nb_feux }}</div>
+                {% endfor %}
+
+
+                {% for camion in camion_dispo %}
+                    <div> Nombre de camions disponibles :</div>
+                    <div> {{ camion.nb_camion }}</div>
+                {% endfor %}
+            </div>
+
+            <br>
+            <button class="button_emergency" onclick="HideFeu()">Feu</button>
+            <button class="button_emergency" onclick="HideCamion()">Camion</button>
+            
+
+        </div>
         
         <script>
 
@@ -42,7 +74,6 @@
             }).addTo(map);
 
 
-            WayPointsTrace = new L.LayerGroup();
 
             {% for lieux in result %}
 
@@ -61,43 +92,97 @@
                 }
 
                 if ( {{ lieux.intensite }} * 300 > 3500  ){
-                    m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  3500, color:colorcircle} ).addTo(map)
-                    .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
+                    var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  3500, color:colorcircle} ).addTo(map)
+                    .bindPopup( "<br>Position X : "+ {{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
                 } else if ( {{ lieux.intensite }} * 300 < 100 ) {
-                    m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  200, color:colorcircle} ).addTo(map)
-                    .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
+                    var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  200, color:colorcircle} ).addTo(map)
+                    .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
                 }else{
-                    m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius: {{ lieux.intensite }} * 300, color:colorcircle} ).addTo(map)
-                    .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
+                    var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius: {{ lieux.intensite }} * 300, color:colorcircle} ).addTo(map)
+                    .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
                 }
 
-                Wpt_Name = '<b><input type="text" value="Etape NN" id="MyName"/> <input type="button" value="Save" Onclick="console.log("toto")"/>';
-
-                m.data = {
-                    properties: { name: Wpt_Name }
-                };
-
-                m.addTo(WayPointsTrace);
-
-                m.getPopup().on("click", function (e) {
-	  
-                //  m.setLatLng(e.latlng);
-                
-                    m.getPopup().setContent(ItemPopup);
-                });
+           
+                L.DomUtil.addClass(m._path, "Feu");
+            
 
             {% endfor %}
 
-              var myIcon = L.icon({
-                iconUrl: '/images/Camion.png',
-                iconSize: [80, 50],
-                
+            size_camion = [70, 30]
+
+             var icon_autre = L.icon({
+                iconUrl: '/images/Camion_Citerne0.png',
+                iconSize: size_camion,
+            });
+
+            var icon0 = L.icon({
+                iconUrl: '/images/Camion_Citerne0.png',
+                iconSize: size_camion,
+            });
+
+            var icon1 = L.icon({
+                iconUrl: '/images/Camion_Citerne1.png',
+                iconSize: size_camion,
+            });
+            var icon2 = L.icon({
+                iconUrl: '/images/Camion_Citerne2.png',
+                iconSize: size_camion,
+            });
+            var icon3 = L.icon({
+                iconUrl: '/images/Camion_Citerne3.png',
+                iconSize: size_camion,
             });
                  
             {% for Camion_1 in camion %}
-                L.marker([{{ 42.54 - Camion_1.position_x/12 }},  {{ 8.8 + Camion_1.position_y/20 }}], {icon: myIcon}).addTo(map)            
+                if ( {{Camion_1.citerne}} == 0) {
+                    icon_camion = icon0
+                }else if ({{Camion_1.citerne}}  == 1) {
+                    icon_camion = icon1
+                }else if ({{Camion_1.citerne}}  == 2) {
+                    icon_camion = icon2
+                }else if ({{Camion_1.citerne}}  == 3) {
+                    icon_camion = icon3
+                }else{
+                    icon_camion = icon_autre
+                }
+
+                var marker = L.marker([{{ 42.54 - Camion_1.position_x/12 }},  {{ 8.8 + Camion_1.position_y/20 }}], {icon: icon_camion})
+                    
+                    .bindPopup( "Camion n°" + {{ Camion_1.id }} + "<br>Position X : " + {{ 42.54 - Camion_1.position_x/12 }} + "<br>Position Y : " + {{ 8.8 + Camion_1.position_y/20 }} + "<br> Citerne :" +{{ Camion_1.citerne }} + "<br> Etat : " + {{ Camion_1.etat }} )
+                    .addTo(map) 
+
+                L.DomUtil.addClass(marker._icon, 'Camion');
+
             {% endfor %}
 
+
+            function HideCamion() {
+                var x = document.getElementsByClassName("Camion");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    if (x[i].style.display === "none") {
+                        x[i].style.display = "block";
+                    } else {
+                        x[i].style.display = "none";
+                    }
+                }
+            }
+
+            function HideFeu() {
+                var x = document.getElementsByClassName("Feu");
+                var i;
+                for (i = 0; i < x.length; i++) {
+                    if (x[i].style.display === "none") {
+                        x[i].style.display = "block";
+                    } else {
+                        x[i].style.display = "none";
+                    }
+                }
+            }
+
+
+           
+       
 
     
         </script>

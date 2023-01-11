@@ -275,3 +275,38 @@ body{
 
 
 #map { height: 180px; }
+
+
+.filtre{
+    background: rgb(65, 65, 66);
+    color: rgb(255,255,255);
+    max-width: 300px;
+    max-height: 200px;
+    border-radius: 10px;
+    border: 3px solid rgba(0, 0, 0, 0.61);    
+
+    padding: 20px 30px 20px 30px;
+    font-family: "SF Pro Text";
+    
+
+    position: absolute; 
+    left: 100px; 
+    top: 100px;
+    z-index:10000;
+}
+
+.menu_emergency{
+    display: flex;
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button_emergency{
+
+    border-radius: 10px;
+    border: 3px solid rgba(0, 0, 0, 0.61);   
+
+    background: #1d1d1f;
+}
