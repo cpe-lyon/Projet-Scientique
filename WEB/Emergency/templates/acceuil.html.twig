@@ -48,17 +48,19 @@
 
                 
 
-                if ({{lieux.intensite}} <= 3){
-                    colorcircle = '#41DE25'
+                if ({{lieux.intensite}} < 4){
+                    colorcircle = '#2A70E5'
                 }else if  ({{lieux.intensite}} <= 6) { 
                     colorcircle = '#FFC300'
-                }else if  ({{lieux.intensite}} <= 9) { 
+                }else if  ({{lieux.intensite}} <= 8) { 
                     colorcircle = '#FF5733'
-                }else {
+                }else if ({{lieux.intensite}} <= 10) {
                     colorcircle = '#C70039'
+                }else{
+                    colorcircle = '#000000'
                 }
 
-                if ( {{ lieux.intensite }} * 300 > 3500 ){
+                if ( {{ lieux.intensite }} * 300 > 3500  ){
                     m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  3500, color:colorcircle} ).addTo(map)
                     .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
                 } else if ( {{ lieux.intensite }} * 300 < 100 ) {
