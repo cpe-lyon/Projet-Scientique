@@ -98,10 +98,13 @@ if __name__ == '__main__':
                                 client = paho.Client("Alarme")
                                 client.on_publish = on_publish
                                 client.connect(broker_address)
-
-                                list_data_mqtt = ast.literal_eval(data_decode)
-                                point = f'capteur,tag={str(list_data_mqtt[0])+str(list_data_mqtt[1])} x={str(list_data_mqtt[0])},y={str(list_data_mqtt[1])},i={str(list_data_mqtt[2])}'
-                                client.publish("feu",point)
+                                
+                                try : 
+                                        list_data_mqtt = ast.literal_eval(data_decode)
+                                        point = f'capteur,tag={str(list_data_mqtt[0])+str(list_data_mqtt[1])} x={str(list_data_mqtt[0])},y={str(list_data_mqtt[1])},i={str(list_data_mqtt[2])}'
+                                        client.publish("feu",point)
+                                except: 
+                                        print("Erreur de conversion")
 
                                 #PostgreSQL
                                 try :
