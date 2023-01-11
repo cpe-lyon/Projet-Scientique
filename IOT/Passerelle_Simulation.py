@@ -66,7 +66,7 @@ def connect():
         print(db_version)
 
         for row in db_version:
-            x = ("[%f,%f,%f]\n" %(row[1], row[2], row[3]) )
+            x = ("[%d,%d,%d]\n" %(row[1], row[2], row[3]) )
             print(x)
             sendUARTMessage(x) 
             
