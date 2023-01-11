@@ -22,7 +22,7 @@
 	{% endif %}
 </header>
 
-<body>
+<body onload="map()">
 
 
     <div style=" display: flex;
@@ -43,8 +43,7 @@
                     <div>{{ feux.nb_feux_interventions }}</div>
                 {% endfor %}
 
-               
-                
+                            
                 
                 {% for feu in total_feux  %}
                     <div>Nombre de feux en cours :</div>
@@ -59,123 +58,141 @@
             </div>
 
             <br>
-            <button class="button_emergency" onclick="HideFeu()">Feu</button>
-            <button class="button_emergency" onclick="HideCamion()">Camion</button>
+            <button id="button_emergency_feu" class="button_emergency" onclick="HideFeu()">Feu</button>
+            <button id="button_emergency_camion" class="button_emergency" onclick="HideCamion()">Camion</button>
             
 
         </div>
         
         <script>
 
-        var map = L.map('map').setView([42.3, 9.1], 10);
+  
 
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+        function map(){
+
+            var map = L.map('map').setView([42.3, 9.1], 10);
+
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
 
 
 
-            {% for lieux in result %}
+                {% for lieux in result %}
 
+                    
+
+                    if ({{lieux.intensite}} < 4){
+                        colorcircle = '#2A70E5'
+                    }else if  ({{lieux.intensite}} <= 6) { 
+                        colorcircle = '#FFC300'
+                    }else if  ({{lieux.intensite}} <= 8) { 
+                        colorcircle = '#FF5733'
+                    }else if ({{lieux.intensite}} <= 10) {
+                        colorcircle = '#C70039'
+                    }else{
+                        colorcircle = '#000000'
+                    }
+
+                    if ( {{ lieux.intensite }} * 300 > 3500  ){
+                        var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  3500, color:colorcircle} ).addTo(map)
+                        .bindPopup( "<br>Position X : "+ {{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
+                    } else if ( {{ lieux.intensite }} * 300 < 100 ) {
+                        var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  200, color:colorcircle} ).addTo(map)
+                        .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
+                    }else{
+                        var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius: {{ lieux.intensite }} * 300, color:colorcircle} ).addTo(map)
+                        .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
+                    }
+
+            
+                    L.DomUtil.addClass(m._path, "Feu");
                 
 
-                if ({{lieux.intensite}} < 4){
-                    colorcircle = '#2A70E5'
-                }else if  ({{lieux.intensite}} <= 6) { 
-                    colorcircle = '#FFC300'
-                }else if  ({{lieux.intensite}} <= 8) { 
-                    colorcircle = '#FF5733'
-                }else if ({{lieux.intensite}} <= 10) {
-                    colorcircle = '#C70039'
-                }else{
-                    colorcircle = '#000000'
-                }
+                {% endfor %}
 
-                if ( {{ lieux.intensite }} * 300 > 3500  ){
-                    var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  3500, color:colorcircle} ).addTo(map)
-                    .bindPopup( "<br>Position X : "+ {{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
-                } else if ( {{ lieux.intensite }} * 300 < 100 ) {
-                    var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  200, color:colorcircle} ).addTo(map)
-                    .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
-                }else{
-                    var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius: {{ lieux.intensite }} * 300, color:colorcircle} ).addTo(map)
-                    .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
-                }
+                size_camion = [70, 30]
 
-           
-                L.DomUtil.addClass(m._path, "Feu");
-            
+                var icon_autre = L.icon({
+                    iconUrl: '/images/Camion_Citerne0.png',
+                    iconSize: size_camion,
+                });
 
-            {% endfor %}
+                var icon0 = L.icon({
+                    iconUrl: '/images/Camion_Citerne0.png',
+                    iconSize: size_camion,
+                });
 
-            size_camion = [70, 30]
-
-             var icon_autre = L.icon({
-                iconUrl: '/images/Camion_Citerne0.png',
-                iconSize: size_camion,
-            });
-
-            var icon0 = L.icon({
-                iconUrl: '/images/Camion_Citerne0.png',
-                iconSize: size_camion,
-            });
-
-            var icon1 = L.icon({
-                iconUrl: '/images/Camion_Citerne1.png',
-                iconSize: size_camion,
-            });
-            var icon2 = L.icon({
-                iconUrl: '/images/Camion_Citerne2.png',
-                iconSize: size_camion,
-            });
-            var icon3 = L.icon({
-                iconUrl: '/images/Camion_Citerne3.png',
-                iconSize: size_camion,
-            });
-                 
-            {% for Camion_1 in camion %}
-                if ( {{Camion_1.citerne}} == 0) {
-                    icon_camion = icon0
-                }else if ({{Camion_1.citerne}}  == 1) {
-                    icon_camion = icon1
-                }else if ({{Camion_1.citerne}}  == 2) {
-                    icon_camion = icon2
-                }else if ({{Camion_1.citerne}}  == 3) {
-                    icon_camion = icon3
-                }else{
-                    icon_camion = icon_autre
-                }
-
-                var marker = L.marker([{{ 42.54 - Camion_1.position_x/12 }},  {{ 8.8 + Camion_1.position_y/20 }}], {icon: icon_camion})
+                var icon1 = L.icon({
+                    iconUrl: '/images/Camion_Citerne1.png',
+                    iconSize: size_camion,
+                });
+                var icon2 = L.icon({
+                    iconUrl: '/images/Camion_Citerne2.png',
+                    iconSize: size_camion,
+                });
+                var icon3 = L.icon({
+                    iconUrl: '/images/Camion_Citerne3.png',
+                    iconSize: size_camion,
+                });
                     
-                    .bindPopup( "Camion n°" + {{ Camion_1.id }} + "<br>Position X : " + {{ 42.54 - Camion_1.position_x/12 }} + "<br>Position Y : " + {{ 8.8 + Camion_1.position_y/20 }} + "<br> Citerne :" +{{ Camion_1.citerne }} + "<br> Etat : " + {{ Camion_1.etat }} )
-                    .addTo(map) 
+                {% for Camion_1 in camion %}
+                    if ( {{Camion_1.citerne}} == 0) {
+                        icon_camion = icon0
+                    }else if ({{Camion_1.citerne}}  == 1) {
+                        icon_camion = icon1
+                    }else if ({{Camion_1.citerne}}  == 2) {
+                        icon_camion = icon2
+                    }else if ({{Camion_1.citerne}}  == 3) {
+                        icon_camion = icon3
+                    }else{
+                        icon_camion = icon_autre
+                    }
 
-                L.DomUtil.addClass(marker._icon, 'Camion');
+                    var marker = L.marker([{{ 42.54 - Camion_1.position_x/12 }},  {{ 8.8 + Camion_1.position_y/20 }}], {icon: icon_camion})
+                        
+                        .bindPopup( "Camion n°" + {{ Camion_1.id }} + "<br>Position X : " + {{ 42.54 - Camion_1.position_x/12 }} + "<br>Position Y : " + {{ 8.8 + Camion_1.position_y/20 }} + "<br> Citerne :" +{{ Camion_1.citerne }} + "<br> Etat : " + {{ Camion_1.etat }} )
+                        .addTo(map) 
 
-            {% endfor %}
+                    L.DomUtil.addClass(marker._icon, 'Camion');
+
+                {% endfor %}
+
+            }
 
 
             function HideCamion() {
                 var x = document.getElementsByClassName("Camion");
+                var button = document.getElementById("button_emergency_camion");
                 var i;
                 for (i = 0; i < x.length; i++) {
                     if (x[i].style.display === "none") {
                         x[i].style.display = "block";
+                        button.style.color = "red";
+                        
+                        
                     } else {
                         x[i].style.display = "none";
+                        button.style.color = "green";
+                      
+                       
                     }
                 }
+               
+               
             }
 
             function HideFeu() {
                 var x = document.getElementsByClassName("Feu");
+                var button = document.getElementById("button_emergency_feu");
                 var i;
                 for (i = 0; i < x.length; i++) {
                     if (x[i].style.display === "none") {
                         x[i].style.display = "block";
+                        button.style.color = "red";
                     } else {
                         x[i].style.display = "none";
+                        button.style.color = "green";
                     }
                 }
             }

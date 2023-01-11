@@ -216,6 +216,14 @@ insert into Equipe_Personne values(5,9);
 insert into Equipe_Personne values(5,10);
 
 
+insert into Casernes values(1,1,1);
+insert into Casernes values(2,2,1);
+insert into Casernes values(3,3,1);
+insert into Casernes values(4,4,1);
+insert into Casernes values(5,5,1);
+
+
+
 
 
 -- requetes --
