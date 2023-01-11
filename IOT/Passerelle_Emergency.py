@@ -11,7 +11,7 @@ import pycurl
 # send serial message 
 SERIALPORT = "/dev/ttyACM0"
 BAUDRATE = 115200
-broker_address = "127.0.0.1"
+broker_address = "172.20.10.7"
 ser = serial.Serial()
 
 def initUART():        

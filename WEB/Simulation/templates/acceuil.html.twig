@@ -47,14 +47,16 @@
 
                 
 
-                if ({{lieux.intensite}} <= 3){
+                if ({{lieux.intensite}} <= 4){
                     colorcircle = '#41DE25'
                 }else if  ({{lieux.intensite}} <= 6) { 
                     colorcircle = '#FFC300'
-                }else if  ({{lieux.intensite}} <= 9) { 
+                }else if  ({{lieux.intensite}} <= 8) { 
                     colorcircle = '#FF5733'
-                }else {
+                }else if ({{lieux.intensite}} <= 10) {
                     colorcircle = '#C70039'
+                }else{
+                    colorcircle = '#FFFFFF'
                 }
 
                 if ( {{ lieux.intensite }} * 300 > 3500 ){
