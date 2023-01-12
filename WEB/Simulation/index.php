@@ -60,12 +60,10 @@ elseif($_SERVER['REQUEST_METHOD'] == 'GET'){
     
 }elseif($page == "acceuil"){
     $emergency -> Emergency_Localisation_Feux();
-    
-  
-   
-
 }
-    
+elseif($page == "reset"){
+    $emergency->reset(); // page de réinitialisation du mot de passe
+}
 else{
         if (isset($_SESSION['email']) and $page=="acceuil"){
             $index->render('acceuil_log'); // page d'accueil si l'utilisateur est connecté

@@ -30,7 +30,7 @@
     justify-content: center;
     align-items: center;">
 
-        <div id="map"  style="width: 200vh; height: 45vw;"></div>
+        <div id="map"  style="width: 100vw; height: 90vw;"></div>
         <div class="filtre">  
             <div class="menu_emergency">
 
@@ -82,7 +82,7 @@
 
                     
 
-                    if ({{lieux.intensite}} < 4){
+                    if ({{lieux.intensite}} <= 4){
                         colorcircle = '#2A70E5'
                     }else if  ({{lieux.intensite}} <= 6) { 
                         colorcircle = '#FFC300'
@@ -96,12 +96,12 @@
 
                     if ( {{ lieux.intensite }} * 300 > 3500  ){
                         var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  3500, color:colorcircle} ).addTo(map)
-                        .bindPopup( "<br>Position X : "+ {{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
+                        .bindPopup( "<br>Position X : "+ {{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})    
                     } else if ( {{ lieux.intensite }} * 300 < 100 ) {
                         var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  200, color:colorcircle} ).addTo(map)
                         .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
                     }else{
-                        var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius: {{ lieux.intensite }} * 300, color:colorcircle} ).addTo(map)
+                        var m = L.circle ([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius: {{ lieux.intensite }} * 300, color:colorcircle} ).addTo(map)
                         .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
                     }
 

@@ -29,7 +29,7 @@
     justify-content: center;
     align-items: center;">
 
-        <div id="map"  style="width: 200vh; height: 45vw;"></div>
+        <div id="map"  style="width: 100vw; height: 90vh;"></div>
 
         
         <script>
@@ -47,7 +47,8 @@
 
                 
 
-                if ({{lieux.intensite}} < 4){
+              
+                if ({{lieux.intensite}} <= 4){
                     colorcircle = '#2A70E5'
                 }else if  ({{lieux.intensite}} <= 6) { 
                     colorcircle = '#FFC300'
@@ -59,17 +60,18 @@
                     colorcircle = '#000000'
                 }
 
-                if ( {{ lieux.intensite }} * 300 > 3500 ){
-                    m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  3500, color:colorcircle} ).addTo(map)
-                    .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
+                if ( {{ lieux.intensite }} * 300 > 3500  ){
+                    var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  3500, color:colorcircle} ).addTo(map)
+                    .bindPopup( "<br>Position X : "+ {{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})    
                 } else if ( {{ lieux.intensite }} * 300 < 100 ) {
-                    m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  200, color:colorcircle} ).addTo(map)
-                    .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
+                    var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius:  200, color:colorcircle} ).addTo(map)
+                    .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
                 }else{
-                    m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius: {{ lieux.intensite }} * 300, color:colorcircle} ).addTo(map)
-                    .bindPopup({{ 42.54 - lieux.adresse_x/12 }} + ' ; ' + {{ 8.8 + lieux.adresse_y/12 }})
+                    var m = L.circle([{{ 42.54 - lieux.adresse_x/12 }},  {{ 8.8 + lieux.adresse_y/20 }}], {radius: {{ lieux.intensite }} * 300, color:colorcircle} ).addTo(map)
+                    .bindPopup( "<br>Position X : " +{{ 42.54 - lieux.adresse_x/12 }} + "<br>Position Y : " + {{ 8.8 + lieux.adresse_y/12 }} + "<br> Intensité : " + {{ lieux.intensite }})
                 }
 
+                
                 Wpt_Name = '<b><input type="text" value="Etape NN" id="MyName"/> <input type="button" value="Save" Onclick="console.log("toto")"/>';
 
                 m.data = {

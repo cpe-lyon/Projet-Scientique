@@ -37,7 +37,7 @@ class Emergency_BDD  extends Model{
     }
 
     public function Emergency_Nb_Feux(){
-        $query = "SELECT COUNT(*) AS nb_feux FROM lieux WHERE intensite > 0";
+        $query = "SELECT COUNT(*) AS nb_feux FROM lieux WHERE intensite > 4 AND intensite < 10 ";
         $stmt = $this->bdd->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

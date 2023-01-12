@@ -21,6 +21,14 @@ class Emergency extends ControllerTwig{
         
     }
 
+    public function reset(){
+
+        $emergency = new Emergency_BDD();
+        $emergency->Reset();
+        $this->render('reset');
+        
+    }
+
 
 
     public function map(){

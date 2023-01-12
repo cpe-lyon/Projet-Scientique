@@ -290,8 +290,8 @@ body{
     
 
     position: absolute; 
-    left: 100px; 
-    top: 100px;
+    left: 2vw; 
+    bottom: 2vh;
     z-index:10000;
 }
 
